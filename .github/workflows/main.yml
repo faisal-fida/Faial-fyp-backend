@@ -20,16 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'AWS'
     steps:
-      - name: Display Secretsss
-        run: |
-            if [ -z "${{ secrets.SSH_HOST }}" ]; then
-              echo "SSH_HOST is empty"
-            else
-              echo "SSH_HOST is not empty"
-              echo "My Secret: ${{ secrets.SSH_HOST }}"
-            fi
-            echo "Anothers Secret: ${{ secrets.SSH_USER }}"
-            
       - name: Configure SSH
         env:
             SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -47,14 +37,6 @@ jobs:
               LogLevel ERROR
               StrictHostKeyChecking no
             END
-      - name: Debugging ls
-        run: |
-          echo "Before ls"
-          ls
-          echo "After ls"
-          pwd
-          ls
       - name: Run deploy
         run: |
-            ls
-            ssh target "cd cooking_core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
+            ssh target "git clone https://github.com/faisal-fida/Faial-fyp-backend backend || (cd backend/ && git pull && docker-compose down && docker-compose build && docker-compose up -d --force-recreate)"
