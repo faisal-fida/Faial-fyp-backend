@@ -47,6 +47,11 @@ jobs:
               LogLevel ERROR
               StrictHostKeyChecking no
             END
+      - name: Debugging ls
+        run: |
+          echo "Before ls"
+          ls
+          echo "After ls"
       - name: Run deploy
         run: |
             ls
