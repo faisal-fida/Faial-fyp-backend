@@ -14,7 +14,7 @@ class AccountManager(BaseUserManager.from_queryset(CustomQuerySet)):  # type: ig
             raise ValueError('Supervisor sabeeh.')
 
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError('supervisor that is  must have is_superuser=True.')
 
         return self.create_user(account_number, password, **extra_fields)
 
