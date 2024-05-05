@@ -19,6 +19,36 @@ jobs:
     needs: quality-assurance
     runs-on: ubuntu-latest
     steps:
+      - name: Display Secrets
+        run: |
+          if [ -z "${{ secrets.SSH_HOST }}" ]; then
+            echo "SSH_HOST is empty"
+          else
+            echo "SSH_HOST is not empty"
+            echo "My Secret: ${{ secrets.SSH_HOST }}"
+          fi
+          echo "Anothers Secret: ${{ secrets.SSH_USER }}"
+
+      - name: Display Secrets
+        run: |
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "SSH_PRIVATE_KEY is empty"
+          else
+            echo "SSH_PRIVATE_KEY is not empty"
+            echo "My Secret: ${{ secrets.SSH_PRIVATE_KEY }}"
+          fi
+          echo "Anothers Secret: ${{ secrets.SSH_PRIVATE_KEY }}"
+
+      - name: Display Secrets
+        run: |
+          if [ -z "${{ secrets.SSH_HOST }}" ]; then
+            echo "SSH_HOST is empty"
+          else
+            echo "SSH_HOST is not empty"
+            echo "My Secret: ${{ secrets.SSH_HOST}}"
+          fi
+          echo "Anothers Secret: ${{ secrets.SSH_HOST }}"
+          
       - name: Configure SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -36,8 +66,10 @@ jobs:
             LogLevel ERROR
             StrictHostKeyChecking no
           END
+
       - name: Echo a message
         run: echo $SSH_HOST
+
       - name: Run deploy
         run: |
           ssh target "cd Cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
