@@ -49,4 +49,5 @@ jobs:
             END
       - name: Run deploy
         run: |
+            ls
             ssh target "cd cooking_core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
