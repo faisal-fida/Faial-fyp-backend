@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "cooking-core"
+version = "0.1.0"
+description = ""
+authors = ["bucky <buckyroberts@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "cooking_core"}]
+
+[tool.poetry.dependencies]
+boto3 = "^1.26.137"
+channels = {extras = ["daphne"], version = "^4.0.0"}
+django = "^4.2"
+django-cors-headers = "^3.14.0"
+django-filter = "^23.2"
+django-model-utils = "^4.3.1"
+django-split-settings = "^1.2.0"
+django-storages = "^1.13.2"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.2.2"
+pillow = "^9.5.0"
+psycopg2 = "^2.9.6"
+pydantic = "^1.10.7"
+pynacl = "^1.5.0"
+python = "^3.10"
+pyyaml = "^6.0"
+whitenoise = "^6.4.0"
+
+[tool.poetry.group.dev.dependencies]
+colorlog = "^6.7.0"
+django-debug-toolbar = "^4.1.0"
+pre-commit = "^3.3.1"
+pytest = "^7.4.0"
+pytest-django = "^4.5.2"
+pytest-xdist = "^3.3.1"
+model-bakery = "^1.12.0"
+
+[tool.isort]
+multi_line_output = 5
+line_length = 119
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "cooking_core.project.settings"
+django_find_project = false
+python_files = "test_*.py"
+testpaths = ["cooking_core"]
+filterwarnings = "ignore::DeprecationWarning:^(?!node\\.).*:"
+
+[tool.yapf]
+based_on_style = "google"
+align_closing_bracket_with_visual_indent = true
+coalesce_brackets = true
+column_limit = 119
+dedent_closing_brackets = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
