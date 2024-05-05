@@ -18,24 +18,35 @@ jobs:
     name: Deploy
     needs: quality-assurance
     runs-on: ubuntu-latest
+    environment: 'AWS'
     steps:
+      - name: Display Secrets
+        run: |
+            if [ -z "${{ secrets.SSH_HOST }}" ]; then
+              echo "SSH_HOST is empty"
+            else
+              echo "SSH_HOST is not empty"
+              echo "My Secret: ${{ secrets.SSH_HOST }}"
+            fi
+            echo "Anothers Secret: ${{ secrets.SSH_USER }}"
+            
       - name: Configure SSH
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            SSH_HOST: ${{ secrets.SSH_HOST }}
+            SSH_USER: ${{ secrets.SSH_USER }}
         run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/github
-          chmod 600 ~/.ssh/github
-          cat >>~/.ssh/config <<END
-          Host target
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/github
-            LogLevel ERROR
-            StrictHostKeyChecking no
-          END
+            mkdir -p ~/.ssh/
+            echo "$SSH_PRIVATE_KEY" > ~/.ssh/github
+            chmod 600 ~/.ssh/github
+            cat >>~/.ssh/config <<END
+            Host target
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/github
+              LogLevel ERROR
+              StrictHostKeyChecking no
+            END
       - name: Run deploy
         run: |
-          ssh target "cd Cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
+            ssh target "cd Cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
