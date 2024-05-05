@@ -52,6 +52,8 @@ jobs:
           echo "Before ls"
           ls
           echo "After ls"
+          pwd
+          ls
       - name: Run deploy
         run: |
             ls
