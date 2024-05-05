@@ -11,7 +11,7 @@ class AccountManager(BaseUserManager.from_queryset(CustomQuerySet)):  # type: ig
         extra_fields.setdefault('is_superuser', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+            raise ValueError('Supervisor sabeeh.')
 
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
