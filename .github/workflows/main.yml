@@ -72,6 +72,4 @@ jobs:
 
       - name: Run deploy
         run: |
-              - name: Run deploy
-        run: |
-          ssh ${{ buntu }}@${{ ec2-13-229-67-196.ap-southeast-1.compute.amazonaws.com}} "cd Cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
