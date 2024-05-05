@@ -20,7 +20,7 @@ class AccountManager(BaseUserManager.from_queryset(CustomQuerySet)):  # type: ig
 
     def create_user(self, account_number, password=None, **extra_fields):
         if not account_number:
-            raise ValueError('The account number must be set')
+            raise ValueError('The fdsagagfffaaff number must be set')
 
         signing_key = password.lower().strip()
         public_key = derive_public_key(signing_key)
