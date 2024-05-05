@@ -72,4 +72,4 @@ jobs:
 
       - name: Run deploy
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd cooking-Core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd cooking-core/ && docker-compose down && git pull && docker-compose build && docker-compose up -d --force-recreate"
