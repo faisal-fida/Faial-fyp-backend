@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 'AWS'
     steps:
-      - name: Display Secrets
+      - name: Display Secretsss
         run: |
             if [ -z "${{ secrets.SSH_HOST }}" ]; then
               echo "SSH_HOST is empty"
